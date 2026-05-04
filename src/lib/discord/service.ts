@@ -70,7 +70,7 @@ type DiscordParsedCommand = {
 
 function parseDiscordCommand(text: string): DiscordParsedCommand {
   const normalized = text.trim();
-  const match = normalized.match(/^(超正解|大正解|正解|不正解|解答|手動)\s*#?\s*(\d+)?$/);
+  const match = normalized.match(/^(超正解|大正解|正解|不正解|解答|手動)(?:\s*#?\s*(\d{3}))?$/);
 
   if (!match) {
     return {

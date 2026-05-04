@@ -39,7 +39,7 @@ export function LogoutButton() {
               <button
                 type="button"
                 onClick={() => formRef.current?.requestSubmit()}
-                className="rounded-xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+                className="rounded-xl bg-sky-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-800"
               >
                 はい
               </button>

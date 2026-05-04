@@ -8,6 +8,7 @@ import { sendDiscordChannelMessage } from "@/lib/discord/api";
 import { getAppSettings, getDefaultDiscordUserId, getDiscordBotConfig, getDiscordStudyChannelId, getPublicAppUrl } from "@/lib/env";
 import { readStoredImage } from "@/lib/storage/local";
 import { resolveChatTargetUserId } from "@/lib/study/dispatch-rules";
+import { formatQuestionNumber } from "@/lib/study/messages";
 import { getDueItemsForDispatch } from "@/lib/study/service";
 
 export const HEALTHCHECK_QUESTION_NUMBERS = [4, 5] as const;
@@ -107,7 +108,7 @@ function buildFailureNotification(result: SendDueReadinessResult) {
     `送信候補件数: ${result.dueItemCount}件`,
     ...failedChecks.map((check) => `- ${check.name}: ${check.detail}`),
     ...failedCandidates.slice(0, 5).map(
-      (candidate) => `- 問題番号${candidate.questionNumber}: ${candidate.reason || "送信前チェックに失敗しました。"}`,
+      (candidate) => `- 問題${formatQuestionNumber(candidate.questionNumber)}: ${candidate.reason || "送信前チェックに失敗しました。"}`,
     ),
   ].join("\n");
 }
@@ -117,14 +118,14 @@ function buildSuccessNotification(result: SendDueReadinessResult) {
   const questionSummary =
     result.questionNumbers.length === 0
       ? "なし"
-      : result.questionNumbers.slice(0, 10).join(", ");
+      : result.questionNumbers.slice(0, 10).map(formatQuestionNumber).join(", ");
 
   return [
     "【12時送信 事前チェックOK】",
     `確認時刻: ${result.checkedAt}`,
     `送信候補件数: ${result.dueItemCount}件`,
     `送信可能: ${readyCount}/${result.candidates.length}件`,
-    `問題番号: ${questionSummary}`,
+    `問題: ${questionSummary}`,
   ].join("\n");
 }
 
@@ -346,7 +347,7 @@ export async function dispatchHealthcheckQuestions() {
   if (missingQuestionNumbers.length > 0) {
     return {
       ok: false as const,
-      detail: `動作確認用の問題番号 ${missingQuestionNumbers.join(", ")} が見つかりません。`,
+      detail: `動作確認用の問題 ${missingQuestionNumbers.map(formatQuestionNumber).join(", ")} が見つかりません。`,
     };
   }
 
@@ -374,7 +375,7 @@ export async function dispatchHealthcheckQuestions() {
   if (remainingItems.length === 0) {
     return {
       ok: true as const,
-      detail: `動作確認用の問題番号 ${alreadySentQuestionNumbers.join(", ")} は本日すでに送信済みです。`,
+      detail: `動作確認用の問題 ${alreadySentQuestionNumbers.map(formatQuestionNumber).join(", ")} は本日すでに送信済みです。`,
     };
   }
 
@@ -398,7 +399,7 @@ export async function dispatchHealthcheckQuestions() {
     ok: true as const,
     detail:
       alreadySentQuestionNumbers.length > 0
-        ? `動作確認用の問題番号 ${remainingItems.map((item) => item.questionNumber).join(", ")} を送信しました。${alreadySentQuestionNumbers.join(", ")} は本日送信済みのため再送していません。`
-        : `動作確認用の問題番号 ${remainingItems.map((item) => item.questionNumber).join(", ")} を送信しました。`,
+        ? `動作確認用の問題 ${remainingItems.map((item) => formatQuestionNumber(item.questionNumber)).join(", ")} を送信しました。${alreadySentQuestionNumbers.map(formatQuestionNumber).join(", ")} は本日送信済みのため再送していません。`
+        : `動作確認用の問題 ${remainingItems.map((item) => formatQuestionNumber(item.questionNumber)).join(", ")} を送信しました。`,
   };
 }

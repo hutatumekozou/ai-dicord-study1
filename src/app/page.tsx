@@ -10,6 +10,7 @@ import {
   STATUS_LABELS,
   STATUS_STYLES,
 } from "@/lib/study/constants";
+import { formatQuestionNumber } from "@/lib/study/messages";
 import { getDashboardData } from "@/lib/study/service";
 import { getSingleSearchParam } from "@/lib/utils";
 
@@ -30,7 +31,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         action={
           <Link
             href="/items/new"
-            className="inline-flex rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="inline-flex rounded-xl bg-sky-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-800"
           >
             新規登録へ
           </Link>
@@ -67,7 +68,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               <h2 className="text-lg font-semibold text-slate-950">今日送る予定の問題</h2>
               <p className="text-sm text-slate-500">当日送信対象の問題を確認できます。</p>
             </div>
-            <Link href="/items?today=1" className="text-sm font-semibold text-emerald-700">
+            <Link href="/items?today=1" className="text-sm font-semibold text-sky-700">
               一覧で見る
             </Link>
           </div>
@@ -82,15 +83,15 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 <Link
                   key={item.id}
                   href={`/items/${item.id}`}
-                  className="flex flex-col gap-3 rounded-2xl border border-slate-200 px-4 py-4 transition hover:border-emerald-200 hover:bg-emerald-50/50"
+                  className="flex flex-col gap-3 rounded-2xl border border-slate-200 px-4 py-4 transition hover:border-sky-200 hover:bg-sky-50/60"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <p className="text-sm font-semibold text-slate-900">
-                        問題番号 {item.questionNumber}
+                        問題{formatQuestionNumber(item.questionNumber)}
                       </p>
                       <p className="text-sm text-slate-600">
-                        {item.productName || "商品名未設定"} / {item.category || "その他"}
+                        {item.productName || "テーマ未設定"} / {item.category || "その他"}
                       </p>
                     </div>
                     <Badge
@@ -131,8 +132,8 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     <p className="text-xs text-slate-500">{formatDateTime(log.actionAt)}</p>
                   </div>
                   <p className="mt-2 text-sm text-slate-600">
-                    問題番号 {log.item.questionNumber} /{" "}
-                    {log.item.productName || "商品名未設定"}
+                    問題{formatQuestionNumber(log.item.questionNumber)} /{" "}
+                    {log.item.productName || "テーマ未設定"}
                   </p>
                   {log.rawText ? (
                     <p className="mt-2 text-xs text-slate-500">受信テキスト: {log.rawText}</p>
@@ -218,7 +219,9 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
                   <span>メッセージ数: {log.messageCount}</span>
                   <span>利用者: {log.user?.displayName || "未設定"}</span>
-                  <span>問題番号: {log.item?.questionNumber ?? "-"}</span>
+                  <span>
+                    問題: {log.item ? formatQuestionNumber(log.item.questionNumber) : "-"}
+                  </span>
                 </div>
                 {log.targetDiscordUserId ? (
                   <p className="mt-2 text-xs text-slate-500">送信先: {log.targetDiscordUserId}</p>

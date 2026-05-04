@@ -37,8 +37,8 @@ type ItemFormProps = {
   currentAnswerImages?: StudyFormImagePreview[];
 };
 
-const DEFAULT_QUESTION_TEXT = "これいくらで売れた?";
-const DEFAULT_ANSWER_TEXT = "売値 → ";
+const DEFAULT_QUESTION_TEXT = "このAI用語を説明してください。";
+const DEFAULT_ANSWER_TEXT = "解答 → ";
 const SUPPORTED_IMAGE_TYPES = "image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif";
 
 type UploadedImageState = {
@@ -393,25 +393,25 @@ export function ItemForm({
         </label>
 
         <label className="space-y-2">
-          <span className="text-sm font-semibold text-slate-700">商品名</span>
+          <span className="text-sm font-semibold text-slate-700">学習テーマ</span>
           <input
             name="productName"
             defaultValue={defaults.productName || ""}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
-            placeholder="例: COACH 二つ折り財布"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
+            placeholder="例: 生成AIの仕組み"
           />
           <FieldError errors={state.fieldErrors.productName} />
         </label>
 
         <label className="space-y-2">
           <span className="text-[13px] font-semibold text-slate-700">
-            ブランド(英語大文字スペースなし)
+            コンテキスト
           </span>
           <input
             name="brandName"
             defaultValue={defaults.brandName || ""}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
-            placeholder="例: COACH"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
+            placeholder="例: LLM / RAG / プロンプト"
           />
           <FieldError errors={state.fieldErrors.brandName} />
         </label>
@@ -422,7 +422,7 @@ export function ItemForm({
             type="date"
             name="firstScheduledAt"
             defaultValue={defaults.firstScheduledAt}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
           />
           <FieldError errors={state.fieldErrors.firstScheduledAt} />
         </label>
@@ -432,7 +432,7 @@ export function ItemForm({
           <select
             name="category"
             defaultValue={defaults.category || DEFAULT_STUDY_CATEGORY}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
           >
             {STUDY_CATEGORIES.map((category) => (
               <option key={category} value={category}>
@@ -450,7 +450,7 @@ export function ItemForm({
           name="note"
           defaultValue={defaults.note || DEFAULT_QUESTION_TEXT}
           rows={6}
-          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
+          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
           placeholder="Discordでそのまま送る問題文を入力してください"
         />
         <FieldError errors={state.fieldErrors.note} />
@@ -462,7 +462,7 @@ export function ItemForm({
           name="memo"
           defaultValue={defaults.memo || DEFAULT_ANSWER_TEXT}
           rows={4}
-          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
+          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
           placeholder="Discordでそのまま返す解答を入力してください"
         />
         <FieldError errors={state.fieldErrors.memo} />

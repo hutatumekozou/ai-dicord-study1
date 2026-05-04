@@ -3,6 +3,7 @@
 import { useEffect, useState, useTransition } from "react";
 
 import { updateFavoriteInlineAction } from "@/actions/study-item-actions";
+import { formatQuestionNumber } from "@/lib/study/messages";
 import { cn } from "@/lib/utils";
 
 type FavoriteToggleProps = {
@@ -46,8 +47,8 @@ export function FavoriteToggle({
       )}
       aria-label={
         favorite
-          ? `問題番号${questionNumber}をお気に入りから外す`
-          : `問題番号${questionNumber}をお気に入りにする`
+          ? `問題${formatQuestionNumber(questionNumber)}をお気に入りから外す`
+          : `問題${formatQuestionNumber(questionNumber)}をお気に入りにする`
       }
     >
       {favorite ? "★" : "☆"}

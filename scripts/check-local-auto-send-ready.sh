@@ -10,7 +10,7 @@ notify_failure() {
   local message="$1"
 
   if command -v osascript >/dev/null 2>&1; then
-    osascript -e "display notification \"$message\" with title \"mercari-study 自動送信チェック\"" >/dev/null 2>&1 || true
+    osascript -e "display notification \"$message\" with title \"ai-discord-study 自動送信チェック\"" >/dev/null 2>&1 || true
   fi
 }
 

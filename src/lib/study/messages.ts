@@ -15,6 +15,10 @@ function formatQuestionSentAt(date: Date | string = new Date()) {
   return formatInTimeZone(date, getAppSettings().appTimeZone, "M/d");
 }
 
+export function formatQuestionNumber(questionNumber: number) {
+  return questionNumber.toString().padStart(3, "0");
+}
+
 export function buildQuestionLabel(
   item: Pick<StudyMessageItem, "questionNumber" | "productName">,
   options?: {
@@ -24,7 +28,10 @@ export function buildQuestionLabel(
 ) {
   const includeSentAt = options?.includeSentAt ?? true;
   const productName = item.productName?.trim();
-  const prefix = includeSentAt ? `${formatQuestionSentAt(options?.sentAt)}問題番号:${item.questionNumber}` : `問題番号:${item.questionNumber}`;
+  const questionNumber = formatQuestionNumber(item.questionNumber);
+  const prefix = includeSentAt
+    ? `${formatQuestionSentAt(options?.sentAt)}問題${questionNumber}`
+    : `問題${questionNumber}`;
 
   return productName ? `${prefix} ${productName}` : prefix;
 }
@@ -63,16 +70,16 @@ export function buildDiscordQuestionMessage(
 ${item.question}
 
 返信方法:
-- 「超正解${item.questionNumber}」→ 30日後に再出題
-- 「大正解${item.questionNumber}」→ 14日後に再出題
-- 「解答${item.questionNumber}」→ 解答を表示
-- 「正解${item.questionNumber}」→ 正解として記録
-- 「不正解${item.questionNumber}」→ 明日もう一度出題
-- 「手動${item.questionNumber}」→ この問題を手動送信に切り替え`;
+- 「超正解${formatQuestionNumber(item.questionNumber)}」→ 30日後に再出題
+- 「大正解${formatQuestionNumber(item.questionNumber)}」→ 14日後に再出題
+- 「解答${formatQuestionNumber(item.questionNumber)}」→ 解答を表示
+- 「正解${formatQuestionNumber(item.questionNumber)}」→ 正解として記録
+- 「不正解${formatQuestionNumber(item.questionNumber)}」→ 明日もう一度出題
+- 「手動${formatQuestionNumber(item.questionNumber)}」→ この問題を手動送信に切り替え`;
 }
 
 export function buildAnswerMessage(item: Pick<StudyMessageItem, "questionNumber" | "answer">) {
-  return `問題番号: ${item.questionNumber}
+  return `問題${formatQuestionNumber(item.questionNumber)}
 【解答】
 ${item.answer}
 
@@ -85,16 +92,16 @@ ${item.answer}
 }
 
 export function buildDiscordAnswerMessage(item: Pick<StudyMessageItem, "questionNumber" | "answer">) {
-  return `問題番号: ${item.questionNumber}
+  return `問題${formatQuestionNumber(item.questionNumber)}
 【解答】
 ${item.answer}
 
 自己判定して返信してください。
-- 「超正解${item.questionNumber}」
-- 「大正解${item.questionNumber}」
-- 「正解${item.questionNumber}」
-- 「不正解${item.questionNumber}」
-- 「手動${item.questionNumber}」`;
+- 「超正解${formatQuestionNumber(item.questionNumber)}」
+- 「大正解${formatQuestionNumber(item.questionNumber)}」
+- 「正解${formatQuestionNumber(item.questionNumber)}」
+- 「不正解${formatQuestionNumber(item.questionNumber)}」
+- 「手動${formatQuestionNumber(item.questionNumber)}」`;
 }
 
 export function buildSuperCorrectReplyMessage() {
@@ -122,12 +129,12 @@ export function buildBatchDispatchSummaryMessage(
   sentAt: Date | string = new Date(),
 ) {
   const datedQuestionNumbers = questionNumbers.map(
-    (questionNumber) => `${formatQuestionSentAt(sentAt)}問題番号: ${questionNumber}`,
+    (questionNumber) => `${formatQuestionSentAt(sentAt)}問題${formatQuestionNumber(questionNumber)}`,
   );
 
   return `【今 送信した問題一覧】
 送信件数: ${questionNumbers.length}件
-問題番号:
+問題:
 ${datedQuestionNumbers.join("\n")}`;
 }
 
@@ -164,9 +171,9 @@ export function buildEmptyCategoryDispatchMessage(category: string) {
 }
 
 export function buildLineHelpMessage() {
-  return "受付可能な返信は「解答」「超正解」「大正解」「正解」「不正解」「手動」です。カテゴリ名を送るとそのカテゴリの苦手問題を最大5問、ブランド名を送るとそのブランドの苦手問題を最大10問出題します。";
+  return "受付可能な返信は「解答」「超正解」「大正解」「正解」「不正解」「手動」です。カテゴリ名を送るとそのカテゴリの苦手問題を最大5問、コンテキストを送るとそのコンテキストの苦手問題を最大10問出題します。";
 }
 
 export function buildDiscordHelpMessage() {
-  return "受付可能な返信は「解答87」「超正解87」「大正解87」「正解87」「不正解87」「手動87」のように問題番号付きです。カテゴリ名を送るとそのカテゴリの苦手問題を最大5問、ブランド名を送るとそのブランドの苦手問題を最大10問このチャンネルへ送ります。";
+  return "受付可能な返信は「解答087」「超正解087」「大正解087」「正解087」「不正解087」「手動087」のように3桁の問題番号付きです。カテゴリ名を送るとそのカテゴリの苦手問題を最大5問、コンテキストを送るとそのコンテキストの苦手問題を最大10問このチャンネルへ送ります。";
 }

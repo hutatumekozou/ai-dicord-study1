@@ -21,7 +21,7 @@ import {
   STATUS_LABELS,
   STATUS_STYLES,
 } from "@/lib/study/constants";
-import { buildQuestionLabel } from "@/lib/study/messages";
+import { buildQuestionLabel, formatQuestionNumber } from "@/lib/study/messages";
 import { getStudyItems } from "@/lib/study/service";
 import { cn, getSingleSearchParam } from "@/lib/utils";
 
@@ -130,7 +130,7 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
         action={
           <Link
             href="/items/new"
-            className="inline-flex rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="inline-flex rounded-xl bg-sky-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-800"
           >
             新規登録
           </Link>
@@ -150,14 +150,14 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
               type="text"
               name="q"
               defaultValue={query}
-              placeholder="商品名、ブランド、カテゴリ、問題番号で検索"
-              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-emerald-300"
+              placeholder="テーマ、コンテキスト、カテゴリ、問題001で検索"
+              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-sky-300"
             />
 
             <select
               name="status"
               defaultValue={status}
-              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-emerald-300"
+              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-sky-300"
             >
               {statusOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -169,7 +169,7 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
             <select
               name="category"
               defaultValue={category}
-              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-emerald-300"
+              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-sky-300"
             >
               <option value="ALL">全カテゴリ</option>
               {STUDY_CATEGORIES.map((option) => (
@@ -182,7 +182,7 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
             <select
               name="sendMode"
               defaultValue={sendMode}
-              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-emerald-300"
+              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-sky-300"
             >
               {sendModeOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -194,7 +194,7 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
             <select
               name="elapsedDaysOrder"
               defaultValue={elapsedDaysOrder}
-              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-emerald-300"
+              className="rounded-[18px] border border-slate-200 bg-white px-3.5 py-2 text-[12px] outline-none transition focus:border-sky-300"
             >
               {elapsedDaysOrderOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -215,7 +215,7 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
 
             <button
               type="submit"
-              className="rounded-[18px] bg-slate-950 px-3.5 py-2 text-[12px] font-semibold text-white transition hover:bg-slate-800"
+              className="rounded-[18px] bg-sky-950 px-3.5 py-2 text-[12px] font-semibold text-white transition hover:bg-sky-800"
             >
               絞り込み
             </button>
@@ -225,7 +225,7 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
             <button
               type="submit"
               form={bulkSendFormId}
-              className="rounded-[18px] bg-slate-950 px-3.5 py-2 text-[12px] font-semibold text-white transition hover:bg-slate-800"
+              className="rounded-[18px] bg-sky-950 px-3.5 py-2 text-[12px] font-semibold text-white transition hover:bg-sky-800"
             >
               選択した問題を一括手動送信
             </button>
@@ -239,10 +239,10 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
             <thead className="text-slate-500">
               <tr>
                 <th className="sticky top-0 z-20 bg-slate-50 px-3 py-3.5 font-semibold whitespace-nowrap">選択</th>
-                <th className="sticky top-0 z-20 bg-slate-50 px-2 py-3.5 font-semibold whitespace-nowrap">問題番号</th>
+                <th className="sticky top-0 z-20 bg-slate-50 px-2 py-3.5 font-semibold whitespace-nowrap">問題</th>
                 <th className="sticky top-0 z-20 bg-slate-50 px-1.5 py-3.5 font-semibold whitespace-nowrap">☆</th>
-                <th className="sticky top-0 z-20 bg-slate-50 px-3 py-3.5 font-semibold whitespace-nowrap">商品名</th>
-                <th className="sticky top-0 z-20 bg-slate-50 px-3 py-3.5 font-semibold whitespace-nowrap">ブランド</th>
+                <th className="sticky top-0 z-20 bg-slate-50 px-3 py-3.5 font-semibold whitespace-nowrap">テーマ</th>
+                <th className="sticky top-0 z-20 bg-slate-50 px-3 py-3.5 font-semibold whitespace-nowrap">コンテキスト</th>
                 <th className="sticky top-0 z-20 min-w-[6.5rem] bg-slate-50 px-3 py-3.5 font-semibold whitespace-nowrap">カテゴリ</th>
                 <th className="sticky top-0 z-20 bg-slate-50 px-3 py-3.5 font-semibold whitespace-nowrap">自動送信</th>
                 <th className="sticky top-0 z-20 bg-slate-50 px-2.5 py-3.5 font-semibold whitespace-nowrap">最終学習日</th>
@@ -272,8 +272,8 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
                         name="itemIds"
                         value={item.id}
                         form={bulkSendFormId}
-                        className="mt-0.5 h-4.5 w-4.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
-                        aria-label={`問題番号${item.questionNumber}を選択`}
+                        className="mt-0.5 h-4.5 w-4.5 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+                        aria-label={`問題${formatQuestionNumber(item.questionNumber)}を選択`}
                       />
                     </td>
                     <td className="px-2 py-3.5 font-semibold text-slate-900">
@@ -328,8 +328,8 @@ export default async function ItemsPage({ searchParams }: ItemsPageProps) {
                             type="date"
                             name="nextScheduledAt"
                             defaultValue={formatDateInputValue(item.nextScheduledAt)}
-                            className="w-full rounded-xl border border-slate-200 bg-white px-2.5 py-1.5 text-[11px] outline-none transition focus:border-emerald-300"
-                            aria-label={`問題番号${item.questionNumber}の次回送信日`}
+                            className="w-full rounded-xl border border-slate-200 bg-white px-2.5 py-1.5 text-[11px] outline-none transition focus:border-sky-300"
+                            aria-label={`問題${formatQuestionNumber(item.questionNumber)}の次回送信日`}
                           />
                           <SubmitButton
                             label="更新"

@@ -17,8 +17,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "メルカリ物販 学習問題化アプリ",
-  description: "画像と補足情報からAIで問題を生成し、Discord DMで復習できる学習支援アプリ",
+  title: "AI知識 Discord 学習アプリ",
+  description: "AIに関する知識問題を登録し、Discordで毎日復習できる学習支援アプリ",
 };
 
 export default function RootLayout({
@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${notoSansJp.variable} ${ibmPlexMono.variable} antialiased`}
       >
-        <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.12),_transparent_32%),linear-gradient(180deg,_#f6fbf8_0%,_#f8fafc_40%,_#eef2f7_100%)]">
+        <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(14,165,233,0.16),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,11,0.12),_transparent_30%),linear-gradient(180deg,_#f8fbff_0%,_#f8fafc_42%,_#eef4f8_100%)]">
           <AppShell>{children}</AppShell>
         </div>
       </body>

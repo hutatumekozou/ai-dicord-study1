@@ -14,8 +14,8 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <div className="rounded-[32px] border border-slate-200/70 bg-white/95 p-6 shadow-[0_30px_90px_-50px_rgba(15,23,42,0.55)]">
       <div className="mb-6 space-y-3">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.32em] text-emerald-700">
-          Mercari Study
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.32em] text-sky-700">
+          AI Knowledge
         </p>
         <div>
           <h1 className="text-2xl font-semibold text-slate-950">パスワード入力</h1>
@@ -37,14 +37,14 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             name="password"
             required
             autoFocus
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
             placeholder="パスワードを入力"
           />
         </label>
 
         <button
           type="submit"
-          className="inline-flex w-full justify-center rounded-2xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+          className="inline-flex w-full justify-center rounded-2xl bg-sky-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-sky-800"
         >
           開く
         </button>

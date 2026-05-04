@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/page-header";
 import { formatDateInputValue } from "@/lib/date";
 import { getAppSettings } from "@/lib/env";
 import { DEFAULT_STUDY_CATEGORY } from "@/lib/study/constants";
+import { formatQuestionNumber } from "@/lib/study/messages";
 import { getStudyItemDetail } from "@/lib/study/service";
 
 type EditItemPageProps = {
@@ -23,8 +24,8 @@ export default async function EditItemPage({ params }: EditItemPageProps) {
   return (
     <div className="space-y-6">
       <PageHeader
-        title={`問題編集 #${item.questionNumber}`}
-        description="商品情報や初回送信予定日を更新できます。画像は追加でき、既存画像は選択したものだけ削除できます。"
+        title={`問題編集 #${formatQuestionNumber(item.questionNumber)}`}
+        description="学習テーマや初回送信予定日を更新できます。画像は追加でき、既存画像は選択したものだけ削除できます。"
       />
 
       <section className="rounded-[28px] border border-slate-200/70 bg-white/90 p-6 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.35)]">

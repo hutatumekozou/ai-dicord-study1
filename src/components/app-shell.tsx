@@ -23,19 +23,19 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div className="mx-auto flex min-h-screen max-w-[1500px] flex-col gap-5 px-4 py-5 lg:flex-row lg:px-5">
       <aside className="w-[15rem] max-w-full lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] lg:w-52">
-        <div className="rounded-[28px] border border-slate-200/70 bg-white/90 p-4 shadow-[0_24px_70px_-50px_rgba(15,23,42,0.5)]">
+        <div className="rounded-[24px] border border-slate-200/70 bg-white/92 p-4 shadow-[0_24px_70px_-50px_rgba(15,23,42,0.5)]">
           <div className="mb-5 space-y-2.5">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-700">
-              Mercari Study
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-sky-700">
+              AI Knowledge
             </p>
             <div>
               <h1 className="text-base font-semibold leading-snug text-slate-950">
-                メルカリ物販
+                AI知識
                 <br />
-                学習問題化アプリ
+                Discord学習アプリ
               </h1>
               <p className="mt-2.5 text-[12px] leading-5 text-slate-600">
-                画像と補足情報をAIで問題化し、Discord DMで毎日復習するための自分専用MVPです。
+                AIに関する知識問題を整理し、Discordで毎日18時に復習するための学習サイトです。
               </p>
             </div>
           </div>

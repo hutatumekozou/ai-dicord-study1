@@ -128,7 +128,7 @@ describe("assertReachableImageMessages", () => {
       },
       {
         type: "text",
-        text: "【問題】これはいくらで売れた？",
+        text: "【問題】RAGとは何ですか？",
       },
     ]);
 
@@ -136,7 +136,7 @@ describe("assertReachableImageMessages", () => {
     expect(result.messages).toEqual([
       {
         type: "text",
-        text: "【問題】これはいくらで売れた？",
+        text: "【問題】RAGとは何ですか？",
       },
     ]);
   });

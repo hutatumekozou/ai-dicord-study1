@@ -8,8 +8,8 @@ export function PageHeader({ title, description, action }: PageHeaderProps) {
   return (
     <div className="flex flex-col gap-3 rounded-[24px] border border-slate-200/70 bg-white/90 p-5 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.35)] lg:flex-row lg:items-end lg:justify-between">
       <div className="space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-700">
-          Mercari Study
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-700">
+          AI Knowledge
         </p>
         <div>
           <h1 className="text-xl font-semibold text-slate-950">{title}</h1>

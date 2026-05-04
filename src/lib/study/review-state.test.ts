@@ -102,7 +102,7 @@ describe("study messages", () => {
   const item = {
     questionNumber: 12,
     productName: "BIRDWELL ボードショーツ",
-    question: "売れた理由を説明してください。",
+    question: "RAGの仕組みを説明してください。",
     answer: "付属品が揃っており、状態が良かったためです。",
     explanation: "安心材料が揃うと購入判断が早くなります。",
     previousSentAt: "2026-03-20T12:00:00+09:00",
@@ -111,13 +111,13 @@ describe("study messages", () => {
 
   it("builds question and answer messages", () => {
     expect(buildQuestionLabel(item, { sentAt: "2026-03-31T12:00:00+09:00" })).toBe(
-      "3/31問題番号:12 BIRDWELL ボードショーツ",
+      "3/31問題012 BIRDWELL ボードショーツ",
     );
     expect(buildQuestionLabel(item, { includeSentAt: false })).toBe(
-      "問題番号:12 BIRDWELL ボードショーツ",
+      "問題012 BIRDWELL ボードショーツ",
     );
     expect(buildQuestionMessage(item, "2026-03-31T12:00:00+09:00")).toContain(
-      "3/31問題番号:12 BIRDWELL ボードショーツ",
+      "3/31問題012 BIRDWELL ボードショーツ",
     );
     expect(buildQuestionMessage(item, "2026-03-31T12:00:00+09:00")).toContain(
       "前回送信日: 3/20 / 前回の正誤: 超正解",
@@ -139,10 +139,10 @@ describe("study messages", () => {
       "「メンズアパレル」に該当する問題がまだありません。",
     );
     expect(buildLineHelpMessage()).toContain("カテゴリ名");
-    expect(buildLineHelpMessage()).toContain("ブランド名");
+    expect(buildLineHelpMessage()).toContain("コンテキスト");
     expect(buildLineHelpMessage()).toContain("最大10問");
     expect(buildLineHelpMessage()).toContain("超正解");
-    expect(buildDiscordHelpMessage()).toContain("ブランド名");
+    expect(buildDiscordHelpMessage()).toContain("コンテキスト");
     expect(buildDiscordHelpMessage()).toContain("最大10問");
     expect(buildDiscordHelpMessage()).toContain("超正解");
   });
@@ -152,6 +152,6 @@ describe("study messages", () => {
 
     expect(message).toContain("【今 送信した問題一覧】");
     expect(message).toContain("送信件数: 3件");
-    expect(message).toContain("問題番号:\n3/31問題番号: 9\n3/31問題番号: 23\n3/31問題番号: 21");
+    expect(message).toContain("問題:\n3/31問題009\n3/31問題023\n3/31問題021");
   });
 });

@@ -3,6 +3,7 @@ import { FlashMessage } from "@/components/flash-message";
 import { PageHeader } from "@/components/page-header";
 import { SubmitButton } from "@/components/submit-button";
 import { formatDate, formatDateTime } from "@/lib/date";
+import { formatQuestionNumber } from "@/lib/study/messages";
 import { getDeletedStudyItems } from "@/lib/study/service";
 import { getSingleSearchParam } from "@/lib/utils";
 
@@ -30,8 +31,8 @@ export default async function DeletedItemsPage({ searchParams }: DeletedItemsPag
           <table className="min-w-full text-left text-sm">
             <thead className="bg-slate-50 text-slate-500">
               <tr>
-                <th className="px-4 py-4 font-semibold">問題番号</th>
-                <th className="px-4 py-4 font-semibold">商品名</th>
+                <th className="px-4 py-4 font-semibold">問題</th>
+                <th className="px-4 py-4 font-semibold">テーマ</th>
                 <th className="px-4 py-4 font-semibold">カテゴリ</th>
                 <th className="px-4 py-4 font-semibold">作成日</th>
                 <th className="px-4 py-4 font-semibold">削除日時</th>
@@ -48,7 +49,9 @@ export default async function DeletedItemsPage({ searchParams }: DeletedItemsPag
               ) : (
                 items.map((item) => (
                   <tr key={item.id} className="border-t border-slate-100 align-top">
-                    <td className="px-4 py-4 font-semibold text-slate-900">{item.questionNumber}</td>
+                    <td className="px-4 py-4 font-semibold text-slate-900">
+                      問題{formatQuestionNumber(item.questionNumber)}
+                    </td>
                     <td className="px-4 py-4 text-slate-700">{item.productName || "未設定"}</td>
                     <td className="px-4 py-4 text-slate-700">{item.category || "その他"}</td>
                     <td className="px-4 py-4 text-slate-700">{formatDate(item.createdAt)}</td>

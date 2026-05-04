@@ -31,8 +31,8 @@ type ValidatedStudyItemInput = {
 
 const baseSchema = z
   .object({
-    productName: z.string().max(120, "商品名は120文字以内で入力してください。").default(""),
-    brandName: z.string().max(120, "ブランドは120文字以内で入力してください。").default(""),
+    productName: z.string().max(120, "学習テーマは120文字以内で入力してください。").default(""),
+    brandName: z.string().max(120, "コンテキストは120文字以内で入力してください。").default(""),
     category: z.enum(STUDY_CATEGORIES, {
       error: "カテゴリを選択してください。",
     }).default(DEFAULT_STUDY_CATEGORY),

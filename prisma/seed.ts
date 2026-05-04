@@ -20,14 +20,14 @@ const prisma = new PrismaClient({
 async function ensureSeedImages() {
   const svgTemplates = [
     `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480">
-      <rect width="100%" height="100%" fill="#f8f4ea" />
-      <text x="50%" y="45%" text-anchor="middle" font-size="40" fill="#1f2937">物販画像サンプル 1</text>
-      <text x="50%" y="58%" text-anchor="middle" font-size="22" fill="#6b7280">ブランド小物 / 箱付き / 美品</text>
+      <rect width="100%" height="100%" fill="#eff6ff" />
+      <text x="50%" y="45%" text-anchor="middle" font-size="40" fill="#0f172a">AI知識サンプル 1</text>
+      <text x="50%" y="58%" text-anchor="middle" font-size="22" fill="#475569">LLM / 仕組み / 復習</text>
     </svg>`,
     `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480">
-      <rect width="100%" height="100%" fill="#eff6ff" />
-      <text x="50%" y="45%" text-anchor="middle" font-size="40" fill="#0f172a">物販画像サンプル 2</text>
-      <text x="50%" y="58%" text-anchor="middle" font-size="22" fill="#475569">家電 / 付属品あり / 動作品</text>
+      <rect width="100%" height="100%" fill="#fffbeb" />
+      <text x="50%" y="45%" text-anchor="middle" font-size="40" fill="#0f172a">AI知識サンプル 2</text>
+      <text x="50%" y="58%" text-anchor="middle" font-size="22" fill="#92400e">RAG / 検索 / 根拠</text>
     </svg>`,
   ];
 
@@ -67,24 +67,24 @@ async function main() {
     data: {
       userId: user.id,
       questionNumber: 1,
-      productName: "ブランド財布",
-      brandName: "COACH",
-      category: "財布",
-      note: "角スレが少なく、箱付き。ターゲットはギフト需要も意識する。",
-      memo: "付属品ありで単価を上げる練習用。",
+      productName: "LLMの基本",
+      brandName: "LLM",
+      category: "AI基礎",
+      note: "大規模言語モデルが文章を生成する基本を復習する。",
+      memo: "確率的に次のトークンを予測する点を押さえる。",
       firstScheduledAt: today,
       nextScheduledAt: today,
       status: "PENDING",
-      summary: "箱付きのブランド財布。状態が良く、ギフト需要にも刺さる。",
+      summary: "LLMは大量のテキストから学習し、文脈に続く可能性の高いトークンを生成する。",
       question:
-        "このブランド財布が売れやすい理由と、出品時に必ず確認すべきポイントを説明してください。",
+        "LLMが自然な文章を生成できる基本的な仕組みを説明してください。",
       answer:
-        "ブランド認知に加え、箱付きでギフト需要を拾える点が強いです。角スレやファスナー動作、内側の汚れ、付属品の有無を明示すると購入判断が早くなります。",
+        "大量の文章データから単語や文脈の関係を学習し、入力された文脈に対して次に来る可能性が高いトークンを順番に予測することで文章を作ります。",
       explanation:
-        "財布は状態差で価格が大きく動くカテゴリです。外観だけでなく内側や金具、付属品まで揃えると『安心して買える出品』になります。",
+        "LLMは意味を辞書のように検索しているだけではなく、文脈のパターンをもとに出力します。そのため自然な回答ができますが、事実確認が必要な場面では誤りも起こります。",
       difficulty: "medium",
-      tags: ["ブランド", "財布", "付属品"],
-      keyPoints: ["角スレ確認", "付属品の価値", "ギフト需要"],
+      tags: ["LLM", "トークン", "生成AI"],
+      keyPoints: ["文脈理解", "トークン予測", "事実確認"],
       images: {
         create: walletImages.map((image) => ({
           kind: image.kind,
@@ -99,24 +99,24 @@ async function main() {
     data: {
       userId: user.id,
       questionNumber: 2,
-      productName: "スチームアイロン",
-      brandName: "Panasonic",
-      category: "家電",
-      note: "動作品。付属品あり。季節家電ではないので通年回転しやすい。",
-      memo: "説明書あり。",
+      productName: "RAGの基本",
+      brandName: "RAG",
+      category: "RAG",
+      note: "社内資料や外部データを参照して回答する仕組み。",
+      memo: "検索と生成を分けて理解する。",
       firstScheduledAt: subDays(today, 2),
       nextScheduledAt: addDays(today, 6),
       status: "CORRECT",
-      summary: "動作品の国内ブランド家電。通年需要があり、説明書付きで安心感がある。",
+      summary: "RAGは検索で関連情報を取り出し、その情報を根拠にLLMが回答を生成する仕組み。",
       question:
-        "この家電を販売するときに、購入者が安心する情報を3つ挙げてください。",
+        "RAGを使うメリットを、通常のLLM回答との違いが分かるように説明してください。",
       answer:
-        "通電と動作確認、付属品の有無、使用感や傷の状態です。家電は『届いてすぐ使えるか』が購入判断に直結します。",
+        "RAGは外部資料から関連情報を検索してから回答するため、最新情報や社内固有情報を反映しやすく、回答の根拠も示しやすくなります。",
       explanation:
-        "家電は不安要素を先回りして潰すと売れやすくなります。写真だけでなく、動作確認済みの一文と欠品情報の明記が重要です。",
+        "通常のLLMは学習済み知識に頼るため、古い情報や知らない社内情報には弱いです。RAGは必要な情報を検索して補うことで、回答精度と説明責任を上げます。",
       difficulty: "easy",
-      tags: ["家電", "動作確認", "安心感"],
-      keyPoints: ["通電確認", "付属品明記", "傷の説明"],
+      tags: ["RAG", "検索", "根拠"],
+      keyPoints: ["外部情報参照", "根拠提示", "最新情報"],
       images: {
         create: ironImages.map((image) => ({
           kind: image.kind,
@@ -152,24 +152,24 @@ async function main() {
     data: {
       userId: user.id,
       questionNumber: 3,
-      productName: "ヴィンテージ腕時計",
-      brandName: "SEIKO",
-      category: "腕時計",
-      note: "動作はしているが、ベルトに使用感あり。コレクター層向け。",
-      memo: "相場確認を丁寧に。",
+      productName: "プロンプト設計",
+      brandName: "PROMPT",
+      category: "プロンプト",
+      note: "AIに期待する役割、条件、出力形式を明確にする。",
+      memo: "曖昧な依頼を避ける。",
       firstScheduledAt: subDays(today, 1),
       nextScheduledAt: today,
       status: "ANSWER_SHOWN",
-      summary: "コレクター需要のあるヴィンテージ時計。状態説明と市場理解が重要。",
+      summary: "良いプロンプトは目的、前提、制約、出力形式を具体化してAIの回答品質を安定させる。",
       question:
-        "ヴィンテージ腕時計で利益を残すために、相場確認時に見るべき観点を説明してください。",
+        "AIへの指示で、回答品質を安定させるために入れるべき要素を説明してください。",
       answer:
-        "型番の一致、稼働状態、純正パーツかどうか、ベルトや風防の交換歴、同程度コンディションの販売履歴を確認します。",
+        "目的、AIの役割、前提条件、守るべき制約、出力形式、判断基準、例を入れると回答が安定します。",
       explanation:
-        "ヴィンテージは同じブランドでも型番や純正性で価格が大きく変わります。『見た目が似ている』だけで仕入れると利益が崩れます。",
+        "曖昧な依頼ではAIが補完しすぎて意図とずれることがあります。条件と完成形を先に伝えると、確認しやすく再利用しやすい回答になります。",
       difficulty: "hard",
-      tags: ["ヴィンテージ", "時計", "相場確認"],
-      keyPoints: ["型番一致", "純正パーツ", "販売履歴比較"],
+      tags: ["プロンプト", "指示設計", "出力形式"],
+      keyPoints: ["目的明示", "制約条件", "出力形式"],
       images: {
         create: vintageImages.map((image) => ({
           kind: image.kind,

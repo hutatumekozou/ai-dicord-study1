@@ -34,7 +34,7 @@ export function SubmitButton({
       className={cn(
         "rounded-xl px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60",
         variant === "primary"
-          ? "bg-slate-950 text-white hover:bg-slate-800"
+          ? "bg-sky-950 text-white hover:bg-sky-800"
           : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-50",
         className,
       )}

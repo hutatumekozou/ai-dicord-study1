@@ -1,10 +1,10 @@
-# メルカリ物販 学習問題化アプリ
+# AI知識 Discord 学習アプリ
 
-画像と補足情報をもとに Gemini で学習問題を生成し、Discord DM で毎日出題して、正解/不正解に応じて次回出題日を自動調整する自分専用の学習支援 Web アプリです。
+AIに関する知識問題を登録し、Discordで毎日出題して、正解/不正解に応じて次回出題日を自動調整する学習支援 Web アプリです。自動送信は基本18時運用を想定しています。
 
 ## できること
 
-- 管理画面から商品ごとに画像最大4枚、補足情報、自由メモ、初回送信予定日を登録
+- 管理画面からAI学習テーマごとに画像最大4枚、補足情報、自由メモ、初回送信予定日を登録
 - 保存時に Gemini へ画像とテキストを送り、問題文・模範解答・解説・要点・難易度を生成
 - 問題一覧、問題詳細、編集、再生成、今すぐ送信
 - Discord DM で `解答` `正解` `不正解` を処理
@@ -26,7 +26,7 @@
 ## 画面
 
 - ダッシュボード: 総問題数、今日送信予定、未送信件数、正解数、不正解数、直近ログ、今日送る予定の問題
-- 新規登録: 画像、商品情報、補足情報、自由メモ、初回送信予定日を登録して問題生成
+- 新規登録: 画像、学習テーマ、補足情報、自由メモ、初回送信予定日を登録して問題生成
 - 問題一覧: 検索、状態絞り込み、今日送信対象のみ表示、今すぐ送信、再生成、編集
 - 問題詳細: 画像、要約、問題文、模範解答、解説、難易度、送信/回答履歴、次回送信日変更
 
@@ -173,8 +173,8 @@ npm run migrate:sqlite-to-postgres
 
 旧来の SQLite + 永続ディスク前提で動かしたい場合は、VPS 用テンプレートも残しています。
 
-- ひな形 env: [deploy/vps/env.production.example](/Users/kukkiiboy/Desktop/Codex/★260318★物販LINE学習/deploy/vps/env.production.example)
-- セットアップ手順: [deploy/vps/README.md](/Users/kukkiiboy/Desktop/Codex/★260318★物販LINE学習/deploy/vps/README.md)
+- ひな形 env: [deploy/vps/env.production.example](deploy/vps/env.production.example)
+- セットアップ手順: [deploy/vps/README.md](deploy/vps/README.md)
 
 ## 主な npm scripts
 

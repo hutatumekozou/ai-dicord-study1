@@ -21,6 +21,7 @@ import {
   STATUS_LABELS,
   STATUS_STYLES,
 } from "@/lib/study/constants";
+import { formatQuestionNumber } from "@/lib/study/messages";
 import { getStudyItemDetail } from "@/lib/study/service";
 import { cn, getSingleSearchParam } from "@/lib/utils";
 
@@ -47,7 +48,7 @@ export default async function ItemDetailPage({
   return (
     <div className="space-y-6">
       <PageHeader
-        title={`問題詳細 #${item.questionNumber}`}
+        title={`問題詳細 #${formatQuestionNumber(item.questionNumber)}`}
         description="画像、問題文、解答、送信履歴、回答履歴、次回送信日を確認します。"
         action={
           <div className="flex flex-wrap gap-3">
@@ -80,10 +81,10 @@ export default async function ItemDetailPage({
             </div>
 
             <h2 className="text-xl font-semibold text-slate-950">
-              {item.productName || "商品名未設定"}
+              {item.productName || "テーマ未設定"}
             </h2>
             <div className="mt-2 space-y-1 text-sm text-slate-500">
-              <p>ブランド: {item.brandName || "-"}</p>
+              <p>コンテキスト: {item.brandName || "-"}</p>
               <p>カテゴリ: {item.category || "その他"}</p>
             </div>
 
@@ -169,14 +170,14 @@ export default async function ItemDetailPage({
 
         <div className="space-y-6">
           <div className="rounded-[28px] border border-slate-200/70 bg-white/90 p-6 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.35)]">
-            <h2 className="text-lg font-semibold text-slate-950">商品情報</h2>
+            <h2 className="text-lg font-semibold text-slate-950">学習情報</h2>
             <dl className="mt-4 space-y-4 text-sm">
               <div>
-                <dt className="font-semibold text-slate-500">商品名</dt>
+                <dt className="font-semibold text-slate-500">テーマ</dt>
                 <dd className="mt-1 text-slate-700">{item.productName || "-"}</dd>
               </div>
               <div>
-                <dt className="font-semibold text-slate-500">ブランド</dt>
+                <dt className="font-semibold text-slate-500">コンテキスト</dt>
                 <dd className="mt-1 text-slate-700">{item.brandName || "-"}</dd>
               </div>
               <div>
@@ -237,7 +238,7 @@ export default async function ItemDetailPage({
                   type="date"
                   name="nextScheduledAt"
                   defaultValue={formatDateInputValue(item.nextScheduledAt)}
-                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-300"
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-300"
                 />
               </label>
               <SubmitButton

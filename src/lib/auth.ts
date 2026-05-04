@@ -1,6 +1,6 @@
 const DEFAULT_APP_LOGIN_PASSWORD = "1618";
 
-export const APP_SESSION_COOKIE_NAME = "mercari-study-session";
+export const APP_SESSION_COOKIE_NAME = "ai-discord-study-session";
 export const APP_SESSION_COOKIE_VALUE = "authenticated";
 
 export function getAppLoginPassword() {

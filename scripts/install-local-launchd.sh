@@ -2,20 +2,20 @@
 
 set -euo pipefail
 
-HOUR="${1:-13}"
+HOUR="${1:-18}"
 MINUTE="${2:-0}"
-PREFLIGHT_HOUR="${PREFLIGHT_HOUR:-11}"
+PREFLIGHT_HOUR="${PREFLIGHT_HOUR:-17}"
 PREFLIGHT_MINUTE="${PREFLIGHT_MINUTE:-55}"
 SOURCE_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-RUNTIME_ROOT="${RUNTIME_ROOT:-$HOME/mercari-study-line-runtime}"
-RUNNER_PATH="${RUNNER_PATH:-/Users/kukkiiboy/bin/mercari-study-send-due.sh}"
-PLIST_PATH="${PLIST_PATH:-/Users/kukkiiboy/Library/LaunchAgents/com.kukkiiboy.mercari-study.send-due.plist}"
-LOG_OUT="${LOG_OUT:-/Users/kukkiiboy/Library/Logs/mercari-study-send-due.log}"
-LOG_ERR="${LOG_ERR:-/Users/kukkiiboy/Library/Logs/mercari-study-send-due.error.log}"
-PREFLIGHT_RUNNER_PATH="${PREFLIGHT_RUNNER_PATH:-/Users/kukkiiboy/bin/mercari-study-send-due-preflight.sh}"
-PREFLIGHT_PLIST_PATH="${PREFLIGHT_PLIST_PATH:-/Users/kukkiiboy/Library/LaunchAgents/com.kukkiiboy.mercari-study.send-due-preflight.plist}"
-PREFLIGHT_LOG_OUT="${PREFLIGHT_LOG_OUT:-/Users/kukkiiboy/Library/Logs/mercari-study-send-due-preflight.log}"
-PREFLIGHT_LOG_ERR="${PREFLIGHT_LOG_ERR:-/Users/kukkiiboy/Library/Logs/mercari-study-send-due-preflight.error.log}"
+RUNTIME_ROOT="${RUNTIME_ROOT:-$HOME/ai-discord-study-runtime}"
+RUNNER_PATH="${RUNNER_PATH:-/Users/kukkiiboy/bin/ai-discord-study-send-due.sh}"
+PLIST_PATH="${PLIST_PATH:-/Users/kukkiiboy/Library/LaunchAgents/com.kukkiiboy.ai-discord-study.send-due.plist}"
+LOG_OUT="${LOG_OUT:-/Users/kukkiiboy/Library/Logs/ai-discord-study-send-due.log}"
+LOG_ERR="${LOG_ERR:-/Users/kukkiiboy/Library/Logs/ai-discord-study-send-due.error.log}"
+PREFLIGHT_RUNNER_PATH="${PREFLIGHT_RUNNER_PATH:-/Users/kukkiiboy/bin/ai-discord-study-send-due-preflight.sh}"
+PREFLIGHT_PLIST_PATH="${PREFLIGHT_PLIST_PATH:-/Users/kukkiiboy/Library/LaunchAgents/com.kukkiiboy.ai-discord-study.send-due-preflight.plist}"
+PREFLIGHT_LOG_OUT="${PREFLIGHT_LOG_OUT:-/Users/kukkiiboy/Library/Logs/ai-discord-study-send-due-preflight.log}"
+PREFLIGHT_LOG_ERR="${PREFLIGHT_LOG_ERR:-/Users/kukkiiboy/Library/Logs/ai-discord-study-send-due-preflight.error.log}"
 
 mkdir -p /Users/kukkiiboy/bin /Users/kukkiiboy/Library/LaunchAgents /Users/kukkiiboy/Library/Logs
 "$SOURCE_ROOT/scripts/sync-local-runtime.sh"
@@ -48,7 +48,7 @@ cat > "$PLIST_PATH" <<PLIST
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.kukkiiboy.mercari-study.send-due</string>
+  <string>com.kukkiiboy.ai-discord-study.send-due</string>
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
@@ -77,7 +77,7 @@ cat > "$PREFLIGHT_PLIST_PATH" <<PLIST
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.kukkiiboy.mercari-study.send-due-preflight</string>
+  <string>com.kukkiiboy.ai-discord-study.send-due-preflight</string>
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
@@ -101,8 +101,8 @@ cat > "$PREFLIGHT_PLIST_PATH" <<PLIST
 PLIST
 
 JOB_DOMAIN="gui/$(id -u)"
-JOB_LABEL="com.kukkiiboy.mercari-study.send-due"
-PREFLIGHT_JOB_LABEL="com.kukkiiboy.mercari-study.send-due-preflight"
+JOB_LABEL="com.kukkiiboy.ai-discord-study.send-due"
+PREFLIGHT_JOB_LABEL="com.kukkiiboy.ai-discord-study.send-due-preflight"
 
 launchctl bootout "gui/$(id -u)" "$PLIST_PATH" >/dev/null 2>&1 || true
 launchctl unload "$PLIST_PATH" >/dev/null 2>&1 || true

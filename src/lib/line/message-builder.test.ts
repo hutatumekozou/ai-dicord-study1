@@ -19,7 +19,7 @@ describe("buildQuestionPushMessages", () => {
       type: "text",
     });
     expect(messages[0]).toMatchObject({
-      text: expect.stringContaining("問題番号:3 BIRDWELL ボードショーツ"),
+      text: expect.stringContaining("問題003 BIRDWELL ボードショーツ"),
     });
   });
 
@@ -50,7 +50,7 @@ describe("buildQuestionPushMessages", () => {
     });
     expect(messages[2]).toMatchObject({
       type: "text",
-      text: expect.stringContaining("問題番号:3 BIRDWELL ボードショーツ"),
+      text: expect.stringContaining("問題003 BIRDWELL ボードショーツ"),
     });
   });
 });

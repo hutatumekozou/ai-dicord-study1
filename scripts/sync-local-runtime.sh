@@ -3,7 +3,7 @@
 set -euo pipefail
 
 SOURCE_ROOT="${SOURCE_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
-RUNTIME_ROOT="${RUNTIME_ROOT:-$HOME/mercari-study-line-runtime}"
+RUNTIME_ROOT="${RUNTIME_ROOT:-$HOME/ai-discord-study-runtime}"
 
 mkdir -p "$RUNTIME_ROOT"
 
